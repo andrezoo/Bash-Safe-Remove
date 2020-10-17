@@ -12,11 +12,20 @@ else
 	# Comment for @dshubenok: Program will parse all parameters as urls and will move them to recycle
 	for url in "$@"; do
 
+		# Checking for existing of /RECYCLE
+		if  [ ! -d "$HOME/RECYLCE" ] ; then
+			mkdir -p "$HOME/RECYCLE"
+			if [ ! -d "$HOME/RECYCLE" ] ; then
+				echo "Cannot create a recycle directory"
+				exit 1
+			fi
+		fi
+
 		# Checking for directory or file
 		if [ -d "${url}" ] ; then
 			echo "$url is a directory";
 		else
-			if [ -f "${url}" ]; then
+			if [ -f "${url}" ] ; then
 				echo "${url} is a file";
 			else
 				echo -e "\e[33m${url} \e[39mis not existing file or directory";
