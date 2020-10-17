@@ -13,12 +13,18 @@ else
 	for url in "$@"; do
 
 		# Checking for existing of /RECYCLE
-		if  [ ! -d "$HOME/RECYLCE" ] ; then
-			mkdir -p "$HOME/RECYCLE"
-			if [ ! -d "$HOME/RECYCLE" ] ; then
+		if ! [ -d "~/RECYLCE" ] ; then
+			echo test
+			mkdir -p "~/RECYCLE"
+			if [ ! -d "~/RECYCLE" ] ; then
 				echo "Cannot create a recycle directory"
 				exit 1
 			fi
+		else
+			# Checking for old files
+			for element in `ls $HOME/RECYCLE`; do
+				echo $element
+			done
 		fi
 
 		# Checking for directory or file
@@ -39,4 +45,3 @@ else
 
 	done
 fi
-
