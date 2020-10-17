@@ -13,21 +13,23 @@ else
 	for url in "$@"; do
 
 		# Checking for existing of /RECYCLE
-		if  [ ! -d "$HOME/RECYLCE" ] ; then
+		if ! [ -d "$HOME/RECYLCE" ] ; then
 			mkdir -p "$HOME/RECYCLE"
-			if [ ! -d "$HOME/RECYCLE" ] ; then
+			if ! [ -d "$HOME/RECYCLE" ] ; then
 				echo "Cannot create a recycle directory"
 				exit 1
 			fi
+		else
+			echo test
 		fi
 
 		# Checking for directory or file
 		if [ -d "${url}" ] ; then
-			tar -czvf $HOME/RECYCLE/$url.tar.gz $url
+			tar -czvf $HOME/RECYCLE/$url.$(uuidgen).tar.gz $url
 			rm -rf $url
 		else
 			if [ -f "${url}" ] ; then
-				tar -czvf $HOME/RECYCLE/$url.tar.gz $url
+				tar -czvf $HOME/RECYCLE/$url.$(uuidgen).tar.gz $url
 				rm $url
 			else
 				echo -e "\e[33m${url} \e[39mis not existing file or directory";
