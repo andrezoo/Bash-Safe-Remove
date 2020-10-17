@@ -22,18 +22,18 @@ else
 			fi
 		else
 			# Checking for old files
-			for element in `ls $HOME/RECYCLE`; do
+			for element in `ls ~/RECYCLE`; do
 				echo $element
 			done
 		fi
 
 		# Checking for directory or file
 		if [ -d "${url}" ] ; then
-			tar -czvf $HOME/RECYCLE/$url.tar.gz $url
+			tar -czvf ~/RECYCLE/$url.tar.gz $url
 			rm -rf $url
 		else
 			if [ -f "${url}" ] ; then
-				tar -czvf $HOME/RECYCLE/$url.tar.gz $url
+				tar -czvf ~/RECYCLE/$url.tar.gz $url
 				rm $url
 			else
 				echo -e "\e[33m${url} \e[39mis not existing file or directory";
