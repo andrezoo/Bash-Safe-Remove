@@ -23,14 +23,20 @@ else
 
 		# Checking for directory or file
 		if [ -d "${url}" ] ; then
-			echo "$url is a directory";
+			tar -czvf $HOME/RECYCLE/$url.tar.gz $url
+			rm -rf $url
 		else
 			if [ -f "${url}" ] ; then
-				echo "${url} is a file";
+				tar -czvf $HOME/RECYCLE/$url.tar.gz $url
+				rm $url
 			else
 				echo -e "\e[33m${url} \e[39mis not existing file or directory";
-
 			fi
 		fi
+
+		# Some help for me in future
+		# if test `find "text.txt" -mmin +120`
+
 	done
 fi
+
