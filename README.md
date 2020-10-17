@@ -25,5 +25,5 @@ User must have device with any compatitable distribution of Linux on them or win
 ### First variant of solution:
 Use ```git clone https://github.com/andrezoIsHere/srm.git``` to download the tool. Then use command ```mv $PWD/srm/srm /bin/```. It will move srm script to bin... That's all :)
 ### Second variant of solution:
-Write ```cd ~``` to appear in home directory. Then use ```git clone https://github.com/andrezoIsHere/srm.git``` to download the tool. After that type: ```echo 'alias srm="~/./srm"' >> ~/.bash_profile```
+Write ```cd ~``` to appear in home directory. Then use ```git clone https://github.com/andrezoIsHere/srm.git``` to download the tool. After that type: ```echo 'alias srm="~/srm/./srm"' >> ~/.bash_profile```
 
