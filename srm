@@ -5,7 +5,6 @@
 if [ "$#" -eq "0" ]; then
         echo "Not enough parameters. You need to enter the name of files which you want to delete as parameters"
 else
-
         # Comment for @dshubenok: Program will parse all parameters as urls and will move them to recycle       
         for url in "$@"; do
 
@@ -43,4 +42,5 @@ else
                 # if test `find "text.txt" -mmin +120`
 
         done
+
 fi
