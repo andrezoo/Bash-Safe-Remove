@@ -1,44 +1,46 @@
-#!/bin/bash
-
 # Made by @andrezoIsHere
 # Under the guidance of @dshubenok
 
 # Checking for existing of parameter
 if [ "$#" -eq "0" ]; then
-	echo "Not enough parameters. You need to enter the name of files which you want to delete as parameters"
-
+        echo "Not enough parameters. You need to enter the name of files which you want to delete as parameters"
 else
+        # Comment for @dshubenok: Program will parse all parameters as urls and will move them to recycle       
+        for url in "$@"; do
 
-	# Comment for @dshubenok: Program will parse all parameters as urls and will move them to recycle
-	for url in "$@"; do
+                # Checking for existing of /RECYCLE
+                if [[ -d "$HOME/RECYLCE" ]] ; then
+                        mkdir -p "$HOME/RECYCLE"
+                        if ! [[ -d "$HOME/RECYCLE" ]] ; then
+                                echo "Cannot create a recycle directory"
+                                exit 1
+                        fi
+                else
 
-		# Checking for existing of /RECYCLE
-		if ! [ -d "$HOME/RECYLCE" ] ; then
-			mkdir -p "$HOME/RECYCLE"
-			if ! [ -d "$HOME/RECYCLE" ] ; then
-				echo "Cannot create a recycle directory"
-				exit 1
-			fi
-		else
-			echo test
-		fi
+                        # Checking for old files
+                        for entry in $(ls $HOME/RECYCLE | grep '.tar.gz'); do
+                                if ((((`date +%s` - `stat -c %Y $HOME/RECYCLE/$entry`))+0)) > 604800; then
+                                        rm -rf $HOME/RECYCLE/$entry
+                                fi
+                        done
+                fi
 
-		# Checking for directory or file
-		if [ -d "${url}" ] ; then
-			tar -czvf $HOME/RECYCLE/$url.$(uuidgen).tar.gz $url
-			rm -rf $url
-		else
-			if [ -f "${url}" ] ; then
-				tar -czvf $HOME/RECYCLE/$url.$(uuidgen).tar.gz $url
-				rm $url
-			else
-				echo -e "\e[33m${url} \e[39mis not existing file or directory";
-			fi
-		fi
+                # Checking for directory or file
+                if [ -d "${url}" ] ; then
+                        tar -czvf $HOME/RECYCLE/$url.$(uuidgen).tar.gz $url
+                        rm -rf $url
+                else
+                        if [ -f "${url}" ] ; then
+                                tar -czvf $HOME/RECYCLE/$url.$(uuidgen).tar.gz $url
+                                rm $url
+                        else
+                                echo -e "\e[33m${url} \e[39mis not existing file or directory";
+                        fi
+                fi
 
-		# Some help for me in future
-		# if test `find "text.txt" -mmin +120`
+                # Some help for me in future
+                # if test `find "text.txt" -mmin +120`
 
-	done
+        done
+
 fi
-
