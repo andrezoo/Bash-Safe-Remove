@@ -38,9 +38,6 @@ else
                         fi
                 fi
 
-                # Some help for me in future
-                # if test `find "text.txt" -mmin +120`
-
         done
 
 fi
